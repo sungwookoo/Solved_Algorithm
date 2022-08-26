@@ -11,7 +11,6 @@ public class Main {
 	static int N = -1;
 	static int[][] map;
 	static int[][] D;
-	static boolean[][] visited;
 	static int ans;
 	static int[] dirX = { -1, 1, 0, 0 };
 	static int[] dirY = { 0, 0, -1, 1 };
@@ -47,7 +46,6 @@ public class Main {
 			map = new int[N][N];
 			D = new int[N][N];
 			ans = Integer.MAX_VALUE;
-			visited = new boolean[N][N];
 
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
@@ -72,9 +70,6 @@ public class Main {
 
 		while (!q.isEmpty()) {
 			Pair cur = q.poll();
-			if (visited[cur.x][cur.y])
-				continue;
-			visited[cur.x][cur.y] = true;
 
 			for (int d = 0; d < 4; d++) {
 				int dx = cur.x + dirX[d];
@@ -90,14 +85,6 @@ public class Main {
 			}
 
 		}
-
-//		for (int i = 0; i < N; i++) {
-//			for (int j = 0; j < N; j++) {
-//				System.out.print(D[i][j] + " ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println();
 
 		ans = D[N - 1][N - 1];
 
