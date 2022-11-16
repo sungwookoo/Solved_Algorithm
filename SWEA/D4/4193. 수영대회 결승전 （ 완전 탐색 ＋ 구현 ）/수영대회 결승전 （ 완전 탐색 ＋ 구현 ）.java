@@ -15,7 +15,6 @@ public class Solution {
 			this.y = y;
 			this.t = t;
 		}
-
 	}
 
 	static int N, ans;
@@ -25,10 +24,9 @@ public class Solution {
 	static boolean visitied[][];
 	static int[][] map;
 
-	// 0,1,2 [3]
-	// 4,5,6 [7]
-	// 8,9,10[11]
-	// 시간이 4로나눴을때 나머지가 3이여야 진입가능
+	// 0,1,(2)
+	// 3,4,(5)
+	// 6,7,(8)
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
@@ -69,10 +67,6 @@ public class Solution {
 
 		while (!queue.isEmpty()) {
 			Pair cur = queue.poll();
-//			System.out.printf("[%2d] (%d, %d)\n", cur.t, cur.x, cur.y);
-
-//			if (cur.x == endX && cur.y == endY)
-//				return cur.t - 1;
 
 			for (int d = 0; d < 4; d++) {
 				int dx = cur.x + dirX[d];
@@ -80,20 +74,18 @@ public class Solution {
 
 				if (isOut(dx, dy) || visitied[dx][dy] || map[dx][dy] == 1)
 					continue;
-				
+
 				if (dx == endX && dy == endY)
-					return cur.t+1;
+					return cur.t + 1;
 
 				if (map[dx][dy] == 2) {
 					if (cur.t % 3 == 2) {
 						visitied[dx][dy] = true;
 						queue.add(new Pair(dx, dy, cur.t + 1));
-					}
-					else {
+					} else {
 						queue.add(new Pair(cur.x, cur.y, cur.t + 1));
 					}
-				}
-				else {
+				} else {
 					visitied[dx][dy] = true;
 					queue.add(new Pair(dx, dy, cur.t + 1));
 				}
