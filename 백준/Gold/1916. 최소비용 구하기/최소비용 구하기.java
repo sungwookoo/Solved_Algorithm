@@ -10,8 +10,8 @@ public class Main {
         StringTokenizer st;
         N = Integer.parseInt(br.readLine());
         M = Integer.parseInt(br.readLine());
-        long[][] arr = new long[N+1][N+1];
-        long[] dist = new long[N+1];
+        int[][] arr = new int[N+1][N+1];
+        int[] dist = new int[N+1];
 
         for(int i=1; i<=N; i++) {
             for(int j=1; j<=N; j++) {
@@ -33,17 +33,16 @@ public class Main {
         }
 
         st = new StringTokenizer(br.readLine());
-        int startA = Integer.parseInt(st.nextToken());
-        int endA = Integer.parseInt(st.nextToken());
+        int start = Integer.parseInt(st.nextToken());
+        int end = Integer.parseInt(st.nextToken());
 
         for(int i=1; i<=N; i++) {
             dist[i] = Integer.MAX_VALUE;
         }
 
         Queue<Integer> q = new PriorityQueue<>();
-        dist[startA] = 0;
-        q.add(startA);
-
+        dist[start] = 0;
+        q.add(start);
 
         while(!q.isEmpty()) {
             int cur = q.poll();
@@ -56,7 +55,7 @@ public class Main {
             }
         }
 
-        System.out.println(dist[endA] == Integer.MAX_VALUE ? 0 : dist[endA]);
+        System.out.println(dist[end] == Integer.MAX_VALUE ? 0 : dist[end]);
 
     }
 }
