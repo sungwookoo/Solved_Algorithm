@@ -45,7 +45,6 @@ public class Main {
 		
 		while(!q.isEmpty()) {
 			Pair cur = q.poll();
-//			System.out.println(cur.cnt+"번째 : "+cur.num+", 직전 점프력 : "+cur.power);
 			
 			if(cur.num == 1) {
 				q.add(new Pair(cur.num+cur.power, cur.power, 1));
@@ -72,11 +71,7 @@ public class Main {
 				
 				if(!flag) continue;
 				
-				
-				
-				
 				if(cur.num + power != N && N - (cur.num + power) < power-1) continue;
-//				System.out.println(cur.num+" : "+ (N - (cur.num + power)));
 				
 				visited[cur.num + power] = true;
 				q.add(new Pair(cur.num + power, power, cur.cnt+1));
