@@ -1,44 +1,51 @@
-class Solution {
-    private int answer = 0;
-    private String[] friends = {"A", "C", "F", "J", "M", "N", "R", "T"};
 
+class Solution {
+    static String[] friends;
+    static int ans;
     public int solution(int n, String[] data) {
-        boolean[] isVisited = new boolean[8];
-        dfs("", isVisited, data);
-        System.out.println(answer);
-        return answer;
+        boolean[] visited = new boolean[8];
+        String[] friendss = {"A", "C", "F", "J", "M", "N", "R", "T"};
+        friends = friendss;
+        
+        ans = 0;
+        dfs("", visited, data);
+
+        return ans;
     }
 
-    private void dfs(String names, boolean[] isVisited, String[] datas) {
-        if (names.length() == 7) {
-            if (check(names, datas)) { // 조건만족 체크
-                answer++;
+    static void dfs(String strs, boolean[] visited, String[] data) {
+        if (strs.length() == 7) {
+            if (check(strs, data)) {
+                ans++;
             }
             return;
         }
-        for (int i = 0; i < 8; i++) { // 조합
-            if (!isVisited[i]) {
-                isVisited[i] = true;
-                String name = names + friends[i];
-                dfs(name, isVisited, datas);
-                isVisited[i] = false;
+
+        for (int i = 0; i < 8; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                String str = strs + friends[i];
+                dfs(str, visited, data);
+                visited[i] = false;
             }
         }
     }
 
-    // 조건대로 섰는지 체크
-    private boolean check(String names, String[] datas) {
-        for (String data : datas) {
-            int position1 = names.indexOf(data.charAt(0)); // 프렌즈 포지션1
-            int position2 = names.indexOf(data.charAt(2)); // 프렌즈 포지션2
-            char op = data.charAt(3); // 수식
-            int index = data.charAt(4) -'0'; // 간격
+    static boolean check(String strs, String[] data) {
+        for (String s : data) {
+            int pos1 = strs.indexOf(s.charAt(0));
+            int pos2 = strs.indexOf(s.charAt(2));
+            char op = s.charAt(3);
+            int index = s.charAt(4) - '0';
             if (op == '=') {
-                if (!(Math.abs(position1 - position2) == index+1)) return false; //둘 포지션 차이를 구하기 위해선 index+1 을 해야함에 주의
+                if (!(Math.abs(pos1 - pos2) == index + 1))
+                    return false;
             } else if (op == '>') {
-                if (!(Math.abs(position1 - position2) > index+1)) return false;
+                if (!(Math.abs(pos1 - pos2) > index + 1))
+                    return false;
             } else if (op == '<') {
-                if (!(Math.abs(position1 - position2) < index+1)) return false;
+                if (!(Math.abs(pos1 - pos2) < index + 1))
+                    return false;
             }
         }
         return true;
