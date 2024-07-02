@@ -1,0 +1,7 @@
+if __name__ == "__main__":
+    a = input()
+    b = input()
+    c = int(input())
+    print(int(a) + int(b) - c)
+    print(int(a + b) - c)
+    
