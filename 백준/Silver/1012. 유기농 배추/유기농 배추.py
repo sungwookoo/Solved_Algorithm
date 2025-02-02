@@ -1,15 +1,14 @@
 import sys
 from collections import deque
 
-t = int(sys.stdin.readline().rstrip())
-dirX = [-1, 1, 0, 0]
-dirY = [0, 0, -1, 1]
 
-
-def bfs(arr, x, y):
+def bfs(arr, x, y, m, n):
     q = deque()
     q.append([x, y])
     arr[x][y] = 0
+
+    dirX = [-1, 1, 0, 0]
+    dirY = [0, 0, -1, 1]
 
     while q:
         x, y = q.popleft()
@@ -21,8 +20,8 @@ def bfs(arr, x, y):
                 arr[dx][dy] = 0
 
 
-if __name__ == "__main__":
-
+def solve():
+    t = int(sys.stdin.readline().rstrip())
     for _ in range(t):
         m, n, k = map(int, sys.stdin.readline().split())
         arr = [[0] * n for _ in range(m)]
@@ -35,6 +34,10 @@ if __name__ == "__main__":
         for i in range(m):
             for j in range(n):
                 if arr[i][j] == 1:
-                    bfs(arr, i, j)
+                    bfs(arr, i, j, m, n)
                     ans += 1
-        sys.stdout.write(str(ans)+'\n')
+        sys.stdout.write(str(ans) + '\n')
+
+
+if __name__ == "__main__":
+    solve()
